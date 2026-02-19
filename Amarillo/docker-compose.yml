@@ -49,15 +49,15 @@ services:
     networks:
       - farmacia_network
 
-  #frontend:
-  #  build: ./frontend/Farmacia-Interna
-  #  container_name: web_farmacia
-  #  ports:
-  #    - "80:80"
-  #  depends_on:
-  #    - gateway
-  #  networks:
-  #    - farmacia_network
+  frontend:
+    build: ./frontend/Farmacia-Interna
+    container_name: web_farmacia
+    ports:
+      - "80:80"
+    depends_on:
+      - gateway
+    networks:
+      - farmacia_network
 
   tunnel:
     image: cloudflare/cloudflared:latest
