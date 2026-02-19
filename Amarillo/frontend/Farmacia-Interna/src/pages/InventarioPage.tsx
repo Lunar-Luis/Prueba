@@ -1,3 +1,4 @@
+import { API_URL } from "../config/env"; // <--- Agrega esta línea
 import React, { useState, useEffect } from "react";
 import { useInventario } from "../hooks/useInventario";
 import { useDispatchCart } from "../hooks/useDispatchCart";
@@ -7,12 +8,9 @@ import { ConfirmDispatchModal } from "../components/molecules/ConfirmDispatchMod
 import { Sidebar } from "../components/organisms/Sidebar";
 import { MovimientosTable } from "../components/organisms/MovimientosTable";
 import { useMovimientos } from "../hooks/useMovimientos";
-// IMPORTS DE ICONOS (Dashboard)
 import { BsBoxSeam, BsLayers, BsExclamationTriangle, BsSlashCircle, BsTrophy } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { RecepcionForm } from "../components/organisms/RecepcionForm";
-
-// IMPORTS DE MODALES
 import { RefundModal } from "../components/molecules/RefundModal";
 import { DispatchDetailModal } from "../components/molecules/DispatchDetailModal";
 
@@ -88,7 +86,7 @@ export const InventarioPage: React.FC = () => {
         const usuarioId = localStorage.getItem("usuarioId") || "1";
         const rol = localStorage.getItem("rol") || "AUXILIAR";
 
-        fetch(`http://localhost:8080/api/movimientos?usuarioId=${usuarioId}&rol=${rol}&page=0&size=1000`)
+        fetch(`${API_URL}/movimientos?usuarioId=${usuarioId}&rol=${rol}&page=0&size=1000`)
             .then(res => {
                 if (!res.ok) throw new Error("Error al cargar historial para dashboard");
                 return res.json();
@@ -135,7 +133,7 @@ export const InventarioPage: React.FC = () => {
     try {
       const usuarioId = localStorage.getItem("usuarioId");
       const response = await fetch(
-        "http://localhost:8080/api/despachos/devolucion",
+        `${API_URL}/despachos/devolucion`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

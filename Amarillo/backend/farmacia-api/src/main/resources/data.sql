@@ -28,9 +28,9 @@ INSERT INTO medicamentos (codigo, nombre, descripcion, concentracion, estado_cat
 -- 3. LOTES
 -- ==========================================
 INSERT INTO lotes (id, numero_lote, medicamento_codigo, cantidad_actual, fecha_vencimiento, estado_sanitario, ubicacion, proveedor) VALUES 
-(1, 'LOTE-A100', 'MED-001', 100, '2028-12-31', 'APROBADO', 'Estante A', 'Distribuidora Nacional'),
-(2, 'LOTE-B200', 'MED-002', 50, '2027-06-30', 'APROBADO', 'Estante B', 'Laboratorios MK'),
-(3, 'LOTE-C300', 'MED-003', 200, '2029-01-15', 'APROBADO', 'Estante A', 'Bayer SA');
+(1, 'LOTE-A100', 'MED-001', 100, '2028-12-31', 'DISPONIBLE', 'Estante A', 'Distribuidora Nacional'),
+(2, 'LOTE-B200', 'MED-002', 50, '2027-06-30', 'DISPONIBLE', 'Estante B', 'Laboratorios MK'),
+(3, 'LOTE-C300', 'MED-003', 200, '2029-01-15', 'DISPONIBLE', 'Estante A', 'Bayer SA');
 
 -- ==========================================
 -- 4. USUARIOS
