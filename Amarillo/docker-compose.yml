@@ -28,12 +28,10 @@ services:
         condition: service_healthy
     environment:
       - SERVER_PORT=8081
-      # Nota: Usamos el puerto interno 3306 y el nombre del servicio 'db_farmacia'
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_farmacia:3306/farmacia_db?allowPublicKeyRetrieval=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=1234
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      # Inyecta aquí tu contraseña de gmail si la necesitas
       - MAIL_PASSWORD=yilb ezld rfdm pprl 
     networks:
       - farmacia_network
@@ -47,27 +45,24 @@ services:
       - backend
     environment:
       - SERVER_PORT=8080
-      # AQUÍ ESTÁ LA MAGIA: Le decimos al gateway dónde está el backend en Docker
       - BACKEND_URI=http://backend:8081
     networks:
       - farmacia_network
 
-  frontend:
-    build: ./frontend/Farmacia-Interna
-    container_name: web_farmacia
-    ports:
-      - "80:80"
-    depends_on:
-      - gateway
-    networks:
-      - farmacia_network
+  #frontend:
+  #  build: ./frontend/Farmacia-Interna
+  #  container_name: web_farmacia
+  #  ports:
+  #    - "80:80"
+  #  depends_on:
+  #    - gateway
+  #  networks:
+  #    - farmacia_network
 
-  # 👇👇👇 EL SERVICIO NUEVO (CLOUDFLARE) 👇👇👇
   tunnel:
     image: cloudflare/cloudflared:latest
     container_name: cloudflare_tunnel
     restart: unless-stopped
-    # Conectamos al servicio 'gateway' en el puerto 8080
     command: tunnel --url http://gateway:8080
     depends_on:
       - gateway
